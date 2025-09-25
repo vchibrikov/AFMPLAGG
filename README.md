@@ -1,5 +1,7 @@
 # AFMPLAGG.py
 
+AFMPLAGG (Atomic Force Microscopy Persistence Length AGGregates) is a Python and R hardcode setup to perform image analysis of an aggregate-like objects, captured by means of atomic force microscopy (AFM). Setup was created for the purposes of 2023/51/B/NZ9/02121 OPUS26 project.
+
 This repository contains a Python script for **processing AFM images** (e.g., Bruker format) to:
 - Detect and segment aggregates
 - Measure their **area** and **volume** from height maps
