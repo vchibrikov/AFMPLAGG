@@ -1,74 +1,42 @@
 # AFMPLAGG.py
 
-AFMPLAGG (Atomic Force Microscopy Persistence Length AGGregates) is a Python and R hardcode setup to perform image analysis of an aggregate-like objects, captured by means of atomic force microscopy (AFM). Setup was created for the purposes of 2023/51/B/NZ9/02121 OPUS26 project.
+AFMPLAGG is a Python and R hardcode setup to perform image analysis of aggregate-like objects, captured by means of atomic force microscopy (AFM). 
+Code written for the project entitled "Studies on the conformation and rheological properties of pectins depending on the postharvest maturity of the plant source", supported by the National Science Center, Poland (grant nr - 2023/51/B/NZ9/02121). More information of project: [https://projekty.ncn.gov.pl/index.php?projekt_id=591903](https://projekty.ncn.gov.pl/index.php?projekt_id=604538)
 
-This repository contains a Python script for **processing AFM images** (e.g., Bruker format) to:
-- Detect and segment aggregates
-- Measure their **area** and **volume** from height maps
-- Save **contour coordinates** and metrics into Excel files
-- Export processed images with drawn contours
-- Interactively adjust thresholds and object size using sliders
+## AFMPLAGG.py
+This repository contains a Python script for processing images and detecting contours based on a specified threshold range. It calculates and saves contour coordinates, areas, volumes (if a height map is available), and saves the results in both Excel and image formats.
 
 ## Requirements
+- Visual Studio Code release: 1.93.1
+- Python release: 3.12.4. 64-bit
+- RStudio version: 2022.07.1 Build 554
 
-Install the dependencies before running:
+> Warning! There are no guaranties this code will run on your machine.
 
-```
-pip install pandas pySPM matplotlib scikit-image opencv-python openpyxl numpy
-```
+### Features
+- Contour detection: code detects contours in images using a binary thresholding approach
+- Area and volume calculation: code computes the area and volume of detected contours if a height map is provided
+- Interactive visualization: code allows the user to adjust thresholds and minimum contour area using interactive sliders
+- Output: code saves the contour coordinates, volume, and area data in an Excel file, and the processed image with contours in a JPG format
+- - Thresholding and filtering: code applies custom thresholds and erosion for better contour identification and image cleanup
 
-## Folder Structure
+### Requirements
+- Python 3.12
+- Libraries: pandas, pySPM, opencv-python, matplotlib, scikit-image, numpy
 
-You need to specify three folders in the script:
-- input_folder → path to folder containing input AFM files (.spm, etc.)
-- output_folder → path where Excel files with contour coordinates and aggregate metrics will be saved
-- output_image → path where processed images with contours will be saved
+You can install these libraries using pip:
 
-```
-input_folder = "data/input"
-output_folder = "data/output/excel"
-output_image = "data/output/images"
-```
+### Script overview
+The script performs the following operations:
+- Load and preprocess images: reads images from an input folder; uses the pySPM package to process and clean up images; corrects the plane, removes scars, and applies additional filters
+- Thresholding and contour detection: thresholds the image to create a binary mask based on user-defined upper and lower threshold values; applies morphological operations (erosion and closing) to clean up the binary mask (Fig.1); detects contours and calculates areas and volumes (if a height map is provided)
+- Interactive plotting: displays the image and detected contours using matplotlib; provides sliders for adjusting the lower and upper thresholds, as well as the minimum contour area for detection; updates the displayed image interactively based on slider values (Fig.1)
+- Data output: saves the contour coordinates and area/volume metrics into an Excel file; saves the processed image with contours drawn on it as a JPG file.
 
-## Features
-- The script loads each AFM image, applies flattening and artifact corrections, then performs threshold-based segmentation.
-- Each detected aggregate is outlined with contours (green).
-
-
-![OPUS26_WSP_0 01_S3_A_S_3 097_contours](https://github.com/user-attachments/assets/e266d4a4-102e-4284-bfe3-66cf281b89e3)
-
-
-## Metrics saved:
-- area_px2 → projected aggregate area in pixels²
-- volume_px2_nm → integrated volume from height map (in nm)
-- Interactive sliders allow tuning:
-- Lower threshold
-- Upper threshold
-- Minimum object area
-
-## Outputs
-- Excel file (*_path.xlsx) containing contour_coordinates → X, Y coordinates of each contour, and aggregate_area_volume → area and volume data per aggregate
-- Image file (*_contours.jpg) with contours drawn.
-
-## Example workflow
-- Load AFM/SEM height map
-- Apply corrections
-- Detect aggregates above threshold
-- Export data and visualization
-
-## Citation
-If you use this script in research, please cite this repository or acknowledge the tool in your methods section.
+![Figure_1](https://github.com/user-attachments/assets/b1d7fc8c-33a1-47fe-b400-073294bb0f6b)
+Fig.1. USer interface representation of an AFMPLAGG.py script.
 
 ## License
-This project is released under the MIT License.
-Feel free to use and modify it for your own research.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-
-
-
-
-
-
-
-
-
+> For any issues or feature requests, feel free to open an issue in this repository.
