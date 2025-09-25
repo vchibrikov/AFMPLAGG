@@ -34,6 +34,10 @@ output_image = "data/output/images"
 - The script loads each AFM image, applies flattening and artifact corrections, then performs threshold-based segmentation.
 - Each detected aggregate is outlined with contours (green).
 
+
+![OPUS26_WSP_0 01_S3_A_S_3 097_contours](https://github.com/user-attachments/assets/e266d4a4-102e-4284-bfe3-66cf281b89e3)
+
+
 ## Metrics saved:
 - area_px2 → projected aggregate area in pixels²
 - volume_px2_nm → integrated volume from height map (in nm)
